@@ -5,6 +5,16 @@ from eophis import Freqs
 import argparse
 import os, yaml
 from omegaconf import OmegaConf
+from contextlib import contextmanager
+
+@contextmanager
+def working_directory(path):
+    prev_cwd = os.getcwd()
+    os.chdir(path)
+    try:
+        yield
+    finally:
+        os.chdir(prev_cwd)
 
 def ocean_info():
     # ocean namelist
@@ -65,7 +75,8 @@ def production():
     from ZB_DINO.online.ml_models import OnlineModel
 
     config = OmegaConf.load('online_config.yaml')
-    model = OnlineModel(config)
+    with working_directory('./ZB_DINO'):
+        model = OnlineModel(config)
 
     # get masks
     mask_u = nemo_metrics.receive('mask_u')
