@@ -74,9 +74,12 @@ def production():
     # ++++++++
     from ZB_DINO.online.ml_models import OnlineModel
 
+    eophis.info('========= Load model =========')
     config = OmegaConf.load('online_config.yaml')
     with working_directory('./ZB_DINO'):
         model = OnlineModel(config)
+
+    eophis.info('========= Model loaded =========')
 
     # get masks
     mask_u = nemo_metrics.receive('mask_u')

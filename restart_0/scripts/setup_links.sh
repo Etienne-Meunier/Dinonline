@@ -5,9 +5,9 @@ ZB_DINO=/lustre/fsn1/projects/rech/omr/romr004/code/ZB_DINO/
 
 echo "Setup symlinks"
 
-ln -s nemo $NEMO_EXECUTABLE
-ln -s rebuild_nemo.exe $REBUILD_NEMO
-ln -s restart_files $RESTART_FILES
-ln -s ZB_DINO $ZB_DINO
+ln -sfn $NEMO_EXECUTABLE nemo
+ln -sfn $REBUILD_NEMO rebuild_nemo.exe
+ln -sfn $RESTART_FILES restart_files
+ln -sfn $ZB_DINO ZB_DINO
 
 echo "Done"

@@ -1,0 +1,3 @@
+weights_path: weights/uwiryjj8/checkpoints/last.ckpt
+config_path: weights/uwiryjj8/fit_config.yaml
+debug_path: ./debug/

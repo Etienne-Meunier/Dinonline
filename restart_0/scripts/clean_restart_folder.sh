@@ -18,6 +18,11 @@ PATTERNS=(
     "time.step"
     "timing.output"
     "ocean.output"
+    "namcouple"
+    "namcouple_ref"
+    "communication_report.txt"
+    "layout.dat"
+    "output.namelist.dyn"
 )
 
 echo "Cleaning directory: $TARGET_DIR"
