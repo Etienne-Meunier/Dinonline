@@ -75,7 +75,9 @@ def production():
     from ZB_DINO.online.ml_models import OnlineModel
 
     eophis.info('========= Load model =========')
+    
     config = OmegaConf.load('online_config.yaml')
+    config.debug_path = f'{os.getcwd()}/{config.debug_path}'
     with working_directory('./ZB_DINO'):
         model = OnlineModel(config)
 
