@@ -23,6 +23,7 @@ PATTERNS=(
     "communication_report.txt"
     "layout.dat"
     "output.namelist.dyn"
+    "debug"
 )
 
 echo "Cleaning directory: $TARGET_DIR"

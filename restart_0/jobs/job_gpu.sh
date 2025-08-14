@@ -6,12 +6,13 @@
 #SBATCH --output=DINO_MK25.out
 #SBATCH --error=DINO_MK25.err
 #SBATCH --ntasks-per-node=40
+#SBATCH --cpus-per-task=1
 #SBATCH --nodes=4
-#SBATCH --gres=gpu:4         # Number of GPU per node
-#SBATCH --hint=nomultithread # One MPI process per physical core (no hyperthreading)
+#SBATCH --gres=gpu:4
+#SBATCH --hint=nomultithread
 #SBATCH --time=6:00:00
-#SBATCH --account=omr@v100   # GPU partition
-#SBATCH --qos=qos_gpu-t3 # QoS
+#SBATCH --account=omr@v100
+#SBATCH --qos=qos_gpu-t3
 
 # Load Environnment
 # source ~/.bash_profile
