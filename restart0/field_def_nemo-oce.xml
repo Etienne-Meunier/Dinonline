@@ -105,21 +105,34 @@ that are available in the tidal-forcing implementation (see
       Physical ocean model variables
       ============================================================================================================
   -->
-      <!-- Instantaneous fields -->
-    <field_group id="instantaneous fields">
+  <!-- Zanna & Bolton parameterization -->
+  <field_group id="Zanna_Bolton">
+     <field id="zb_u"       long_name="ZB tendency in i-direction"                unit="m/s2"   grid_ref="grid_U_3D"/>
+     <field id="zb_v"       long_name="ZB tendency in j-direction"                unit="m/s2"   grid_ref="grid_V_3D"/>
+     <field id="zb_surf_u"  long_name="ZB tendency in i-direction at the surface" unit="m/s2"   grid_ref="grid_U_2D"/>
+     <field id="zb_surf_v"  long_name="ZB tendency in j-direction at the surface" unit="m/s2"   grid_ref="grid_V_2D"/>
+
+
+     <field id="zb_inst_u"  long_name="ZB tendency in i-direction at the surface, instantaneous" operation='instant' unit="m/s2"   grid_ref="grid_U_2D">  zb_surf_u </field>
+     <field id="zb_inst_v"  long_name="ZB tendency in j-direction at the surface, instantaneous" operation='instant' unit="m/s2"   grid_ref="grid_V_2D">  zb_surf_v </field>
      <field id="ssu_inst"  long_name="Surface velocity in i-direction, instantaneous" operation='instant' unit="m/s"   grid_ref="grid_U_2D">  ssu </field>
      <field id="ssv_inst"  long_name="Surface velocity in j-direction, instantaneous" operation='instant' unit="m/s"   grid_ref="grid_V_2D">  ssv </field>
-
-     <field id="uoce_inst"  long_name="Velocity in i-direction, instantaneous" operation='instant' unit="m/s"    grid_ref="grid_U_3D">  uoce </field>
-     <field id="e3u_inst"   long_name="U-cell thickness, instantaneous"        operation='instant' unit="m"      grid_ref="grid_U_3D">  e3u  </field>
-
-     <field id="voce_inst"  long_name="Velocity in j-direction, instantaneous" operation='instant' unit="m/s"    grid_ref="grid_V_3D">  voce </field>
-     <field id="e3v_inst"   long_name="V-cell thickness, instantaneous"        operation='instant' unit="m"      grid_ref="grid_V_3D">  e3v  </field>
-
-     <field id="soce_inst"  long_name="Salinity, instantaneous"                operation='instant' unit="1e-3"   grid_ref="grid_T_3D">  soce </field>
-     <field id="toce_inst"  long_name="Temperature, instantaneous"             operation='instant' unit="degC"   grid_ref="grid_T_3D">  toce </field>
-     <field id="e3t_inst"   long_name="T-cell thickness, instantaneous"        operation='instant' unit="m"      grid_ref="grid_T_3D">  e3t  </field>
   </field_group>
+
+        <!-- Instantaneous fields -->
+    <field_group id="instantaneous fields">
+
+     <field id="uoce_inst"      long_name="Velocity in i-direction, instantaneous"      operation='instant' unit="m/s"   grid_ref="grid_U_3D">  uoce </field>
+     <field id="e3u_inst"       long_name="U-cell thickness, instantaneous"             operation='instant' unit="m"     grid_ref="grid_U_3D">  e3u  </field>
+     
+     <field id="voce_inst"      long_name="Velocity in j-direction, instantaneous"      operation='instant' unit="m/s"   grid_ref="grid_V_3D">  voce </field>
+     <field id="e3v_inst"       long_name="V-cell thickness, instantaneous"             operation='instant' unit="m"     grid_ref="grid_V_3D">  e3v  </field>
+     <field id="voce_e3v_inst"       long_name="v times e3v, instantaneous"             operation='instant' unit="m"     grid_ref="grid_V_3D">  voce_e3v  </field>
+
+     <field id="soce_inst"  long_name="Salinity, instantaneous"         operation='instant' unit="1e-3"   grid_ref="grid_T_3D">  soce </field>
+     <field id="toce_inst"  long_name="Temperature, instantaneous"      operation='instant' unit="degC"   grid_ref="grid_T_3D">  toce </field>
+     <field id="e3t_inst"   long_name="T-cell thickness, instantaneous" operation='instant' unit="m"      grid_ref="grid_T_3D">  e3t  </field>
+    </field_group>
 
   <!-- T grid -->
 
@@ -250,9 +263,6 @@ that are available in the tidal-forcing implementation (see
     <field id="mf_Tp"       long_name="plume_temperature"      standard_name="plume_temperature"     unit="degC"   grid_ref="grid_T_3D" />
     <field id="mf_Sp"       long_name="plume_salinity"         standard_name="plume_salinity"        unit="1e-3"   grid_ref="grid_T_3D" />
     <field id="mf_mf"       long_name="mass flux"              standard_name="mf_mass_flux"          unit="m"      grid_ref="grid_T_3D" />
-
-    <!-- variables from external Python models -->
-    <field id="St_rho_2D" long_name="2D_Stanley_density_from_infmod" standard_name="2D_Stanley_rho"  operation="instant" unit="kg/m3" />
 
     <!-- fluxes from damping -->
     <field id="sflx_dmp_cea"  long_name="salt flux due to damping"  standard_name="salt_flux_due_to_damping"          unit="g/m2/s"   />
@@ -612,6 +622,7 @@ that are available in the tidal-forcing implementation (see
     <field id="uocetr_vsum_cumul" long_name="ocean current along i-axis * e3u * e2u cumulated from southwest point" freq_offset="_reset_" operation="instant" freq_op="1mo"  unit="m3/s" />
     <field id="msftbarot"         long_name="ocean_barotropic_mass_streamfunction"   unit="kg s-1" > uocetr_vsum_cumul * $rho0 </field>
 
+
     <field id="ssu"          long_name="ocean surface current along i-axis"                                                                 unit="m/s"                             />
     <field id="ssu_sq"       long_name="ocean surface current along i-axis squared"                                                         unit="m2/s2"  grid_ref="grid_U_2D"      > ssu * ssu </field>
     <field id="sbu"          long_name="ocean bottom current along i-axis"                                                                  unit="m/s"  grid_ref="grid_U_2D_inner" />
@@ -631,10 +642,6 @@ that are available in the tidal-forcing implementation (see
 
     <!-- variables available with MLE (ln_mle=T) -->
     <field id="psiu_mle"     long_name="MLE streamfunction along i-axis"   unit="m3/s"   grid_ref="grid_U_3D" />
-
-    <!-- variables available with external Python model: ln_inf = .true. -->
-    <field id="ext_uf"        long_name="ML U-grid subgrid momentum forcing"   unit="m/s2"   grid_ref="grid_U_3D"/>
-    <field id="ext_uf_inst"   long_name="ML U-grid subgrid momentum forcing, instantaneous" operation='instant' unit="m/s2"   grid_ref="grid_U_3D">  ext_uf </field>
 
     <!-- uoce_eiv: available EIV (ln_ldfeiv=T and ln_ldfeiv_dia=T) -->
     <field id="uoce_eiv"      long_name="EIV ocean current along i-axis"                                  standard_name="bolus_sea_water_x_velocity"                     unit="m/s"   grid_ref="grid_U_3D" />
@@ -697,10 +704,6 @@ that are available in the tidal-forcing implementation (see
 
     <!-- variables available with MLE (ln_mle=T) -->
     <field id="psiv_mle"     long_name="MLE streamfunction along j-axis"   unit="m3/s"   grid_ref="grid_V_3D" />
-
-    <!-- variables available with external Python model: ln_inf = .true. -->
-    <field id="ext_vf"      long_name="ML V-grid subgrid momentum forcing"   unit="m/s" grid_ref="grid_V_3D"/>
-    <field id="ext_vf_inst" long_name="ML V-grid subgrid momentum forcing, instantaneous" operation='instant' unit="m/s2"   grid_ref="grid_V_3D">  ext_vf </field>
 
     <!-- voce_eiv: available EIV (ln_ldfeiv=T and ln_ldfeiv_dia=T)  -->
     <field id="voce_eiv"     long_name="EIV ocean current along j-axis"  standard_name="bolus_sea_water_y_velocity"     unit="m/s"   grid_ref="grid_V_3D" />

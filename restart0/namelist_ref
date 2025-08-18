@@ -4,7 +4,7 @@
 !! NEMO/OCE  :  1 - Domain & run manager (namrun, namcfg, namdom, namtsd, namcrs, namc1d, namc1d_uvd)
 !! namelists    2 - Surface boundary (namsbc, namsbc_flx, namsbc_blk, namsbc_cpl,
 !!                                    namsbc_sas, namtra_qsr, namsbc_rnf,
-!!                                    namisf, namsbc_apr,
+!!                                    namisf, namsbc_apr, 
 !!                                    namsbc_ssr, namsbc_wave, namberg)
 !!              3 - lateral boundary (namlbc, namagrif, nambdy, nambdy_tide)
 !!              4 - top/bot boundary (namdrg, namdrg_top, namdrg_bot, nambbc, nambbl)
@@ -86,7 +86,7 @@
       !                      !  (=F) user defined configuration           (F => create/check namusr_def)
       cn_domcfg = "domain_cfg"  ! domain configuration filename
       !
-      ln_closea    = .false. !  (=T => fill namclo)
+      ln_closea    = .false. !  (=T => fill namclo) 
       !                      !  (=F) no control of net precip/evap over closed sea
       !
    ln_write_cfg = .false.    !  (=T) create the domain configuration file
@@ -106,11 +106,11 @@
 &namclo        !   parameters of the closed sea (cs) behavior                (default: OFF)
 !-----------------------------------------------------------------------
    ln_maskcs = .false.        ! (=T) cs are masked ; So, in this case ln_mask_csundef and ln_clo_rnf have no effect.
-      !                       ! (=F => set ln_mask_csundef and ln_clo_rnf)
+      !                       ! (=F => set ln_mask_csundef and ln_clo_rnf) 
       !                       ! cs masks are read and net evap/precip over closed sea spread out depending on domain_cfg.nc masks.
       !                       ! See ln_mask_csundef and ln_clo_rnf for specific option related to this case
       !
-      ln_mask_csundef = .true.   ! (=T) undefined closed seas are masked ;
+      ln_mask_csundef = .true.   ! (=T) undefined closed seas are masked ; 
       !                          ! (=F) undefined closed seas are kept and no specific treatment is done for these closed seas
       !
       ln_clo_rnf = .true.        ! (=T) river mouth specified in domain_cfg.nc masks (rnf and emp case) are added to the runoff mask.
@@ -133,13 +133,15 @@
 !-----------------------------------------------------------------------
 &namwad        !   Wetting and Drying (WaD)                             (default: OFF)
 !-----------------------------------------------------------------------
+   ln_wd_il    = .false.   !  T/F activation of iterative   limiter
    ln_wd_dl    = .false.   !  T/F activation of directional limiter
-   ln_wd_dl_bc = .false.   !  T/F Directional limiter Baroclinic option
+   ln_wd_dl_bc = .false.   !  T/F Directional limiteer Baroclinic option
    ln_wd_dl_rmp = .false.  !  T/F Turn on directional limiter ramp
    rn_wdmin0   =  0.30     !  depth at which WaD starts
    rn_wdmin1   =  0.2      !  Minimum wet depth on dried cells
    rn_wdmin2   =  0.0001   !  Tolerance of min wet depth on dried cells
    rn_wdld     =  2.5      !  Land elevation below which WaD is allowed
+   nn_wdit     =   20      !  Max iterations for WaD limiter
    rn_wd_sbcdep =  5.0     !  Depth at which to taper sbc fluxes
    rn_wd_sbcfra =  0.999   !  Fraction of SBC fluxes at taper depth (Must be <1)
 /
@@ -271,13 +273,13 @@
    !
    ln_crt_fbk = .false.     !  Add surface current feedback to the wind stress (Renault et al. 2020, doi: 10.1029/2019MS001715)
          rn_stau_a = -2.9e-3   !     Alpha from eq. 10: Stau = Alpha * Wnd + Beta
-         rn_stau_b =  8.0e-3   !     Beta
+         rn_stau_b =  8.0e-3   !     Beta 
    !
    ln_humi_sph = .true.  !  humidity "sn_humi" is specific humidity  [kg/kg]
    ln_humi_dpt = .false. !  humidity "sn_humi" is dew-point temperature [K]
    ln_humi_rlh = .false. !  humidity "sn_humi" is relative humidity     [%]
    ln_tair_pot = .false. !  air temperature read in "sn_tair" is already POTENTIAL TEMPERATURE, NOT ABSOLUTE (ECMWF => ln_tair_pot=.false.)
-   !!
+   !!   
    !! Bulk transfer coefficients over sea-ice: (relevant IF: nn_ice >=1 )
    ln_Cx_ice_cst = .true.     ! use constant ice-air bulk transfer coefficients (value given below)
       rn_Cd_i  = 1.4e-3       ! sea-ice drag coefficient
@@ -458,7 +460,7 @@
       rn_sssr_bnd =   4.e0    !  ABS(Max/Min) value of the damping erp term [mm/day]
       nn_sssr_ice =   1       ! control of sea surface restoring under sea-ice
                               ! 0 = no restoration under ice : * (1-icefrac)
-                              ! 1 = restoration everywhere
+                              ! 1 = restoration everywhere 
                               ! >1 = enhanced restoration under ice : 1+(nn_icedmp-1)*icefrac
 
    cn_dir      = './'      !  root directory for the SST/SSS data location
@@ -596,7 +598,7 @@
    ln_phioc    = .false.       !  TKE flux from wave model
    ln_bern_srfc= .false.       !  wave induced pressure. Bernoulli head J term
    ln_breivikFV_2016 = .false. !  breivik 2016 vertical stokes profile
-   ln_vortex_force = .false.   !  Vortex Force term
+   ln_vortex_force = .false.   !  Vortex Force term 
    ln_stshear  = .false.       !  include stokes shear in EKE computation
 !
    cn_dir      = './'      !  root directory for the waves data location
@@ -620,15 +622,13 @@
    cn_icbrst_in     = "restart_icb" !  suffix of iceberg restart name (input)
    cn_icbrst_indir  = "./"          !  directory from which to read input ocean restarts
    cn_icbrst_out    = "restart_icb" !  suffix of ocean restart name (output)
-   cn_icbrst_outdir = "./"          !  directory from which to read output ocean restarts
+   cn_icbrst_outdir = "./"          !  directory from which to read output ocean restarts          
    !
    !                          ! diagnostics:
    ln_bergdia        = .true.        ! Calculate budgets
    nn_verbose_level  = 0             ! Turn on more verbose output if level > 0
-   !
-   ! nn_verbose_write and nn_sample_rate need to be a multiple of nn_fsbc
-   nn_verbose_write  = 16            ! Timesteps between verbose messages
-   nn_sample_rate    = 16            ! Timesteps between sampling for trajectory storage
+   nn_verbose_write  = 15            ! Timesteps between verbose messages
+   nn_sample_rate    = 1             ! Timesteps between sampling for trajectory storage
    !
    !                          ! iceberg setting:
    !                                 ! Initial mass required for an iceberg of each class
@@ -1199,7 +1199,7 @@
    !                       !                 = 2 first vertical derivative of mixing length bounded by 1
    !                       !                 = 3 as =2 with distinct dissipative an mixing length scale
    ln_mxl0     = .true.    !  surface mixing length scale = F(wind stress) (T) or not (F)
-      nn_mxlice    = 0        ! type of scaling under sea-ice
+      nn_mxlice    = 2        ! type of scaling under sea-ice
       !                       !    = 0 no scaling under sea-ice
       !                       !    = 1 scaling with constant sea-ice thickness
       !                       !    = 2 scaling with mean sea-ice thickness ( only with SI3 sea-ice model )
@@ -1221,7 +1221,7 @@
    !                       !           = 0 no impact of ice cover on langmuir & surface wave breaking
    !                       !           = 1 weigthed by 1-TANH(10*fr_i)
    !                       !           = 2 weighted by 1-fr_i
-   !                       !           = 3 weighted by 1-MIN(1,4*fr_i)
+   !                       !           = 3 weighted by 1-MIN(1,4*fr_i)   
    nn_bc_surf   =     1    !  surface condition (0/1=Dir/Neum) ! Only applicable for wave coupling (ln_cplwave=1)
    nn_bc_bot    =     1    !  bottom condition (0/1=Dir/Neum) ! Only applicable for wave coupling (ln_cplwave=1)
 /
@@ -1245,7 +1245,7 @@
    !                       !           = 1 roughness uses rn_hsri and is weigthed by 1-TANH(10*fr_i)
    !                       !           = 2 roughness uses rn_hsri and is weighted by 1-fr_i
    !                       !           = 3 roughness uses rn_hsri and is weighted by 1-MIN(1,4*fr_i)
-   nn_mxlice     =     0   !  mixing under sea ice
+   nn_mxlice     =     1   !  mixing under sea ice
                            !     = 0 No scaling under sea-ice
                            !     = 1 scaling with constant Ice-ocean roughness (rn_hsri)
                            !     = 2 scaling with mean sea-ice thickness
@@ -1304,7 +1304,7 @@
    rn_cemf    =  1.            ! entrain/detrain coef. (<0 => cte; >0 % depending on dW/dz
    rn_cwmf    = -0.            ! entrain/detrain coef. (<0 => cte; >0 % depending on dW/dz
    rn_cent    = 2.e-5          ! entrain of convective area
-   rn_cdet    = 3.e-5          ! detrain of convective area
+   rn_cdet    = 3.e-5          ! detrain of convective area 
    rn_cap     = 0.9            ! Coef. for CAP estimation
    App_max    = 0.1            ! Maximum convection area (% of the cell)
 /
@@ -1314,7 +1314,7 @@
    ln_mevar    = .false.    !  variable (T) or constant (F) mixing efficiency
    ln_tsdiff   = .true.    !  account for differential T/S mixing (T) or not (F)
 
-   cn_dir      = './'      !  root directory for the iwm data location
+   cn_dir      = './'      !  root directory for the iwm data location                                                                           
    !___________!_________________________!___________________!___________!_____________!________!___________!__________________!__________!_______________!
    !           !  file name              ! frequency (hours) ! variable  ! time interp.!  clim  ! 'yearly'/ ! weights filename ! rotation ! land/sea mask !
    !           !                         !  (if <0  months)  !   name    !   (logical) !  (T/F) ! 'monthly' !                  ! pairing  !    filename   !
@@ -1576,10 +1576,4 @@
    ln_rstseed  = .true.    ! read seed of RNG from restart file
    cn_storst_in  = "restart_sto" !  suffix of stochastic parameter restart file (input)
    cn_storst_out = "restart_sto" !  suffix of stochastic parameter restart file (output)
-/
-!-----------------------------------------------------------------------
-&naminf        ! Inferences models                      (default: OFF)
-!-----------------------------------------------------------------------
-   ln_inf  = .false.       ! activate module for inference models
-   nn_lvl = 1             ! number of grid level on which apply the inference model, (default=jpk)
 /
