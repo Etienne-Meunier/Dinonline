@@ -54,6 +54,7 @@ set -e
 ls -l
 
 ./scripts/setup_links.sh
+./scripts/update_namelist.sh online_config.yaml namelist_cfg
 
 # run eophis in preproduction mode to generate namcouple
 touch namcouple
