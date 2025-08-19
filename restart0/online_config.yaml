@@ -3,3 +3,5 @@ config_path: weights/5fgl4ltv/fit_config.yaml
 debug_path: debug/
 debug_freq: 0.0
 flags: []
+restart_path: restart_files/restart_to_oasis_short.nc
+nsteps: 129599
