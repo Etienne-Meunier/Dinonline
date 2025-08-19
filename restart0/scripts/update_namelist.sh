@@ -26,7 +26,7 @@ fi
 # Extract time_counter from restart
 TIME_COUNTER=$(ncks -H -C --trd -v time_counter "$RESTART_FILE" | sed 's/.*=//')
 NN_IT000=$(( $(printf "%.0f" $TIME_COUNTER) + 1 ))  # add 1 here
-NN_ITEND=$((NN_IT000 + NSTEPS - 1))
+NN_ITEND=$((NN_IT000 + NSTEPS))
 
 # Update namelist_cfg
 RESTART_BASENAME=$(basename "$RESTART_FILE" .nc)
