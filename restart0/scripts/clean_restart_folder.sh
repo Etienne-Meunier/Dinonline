@@ -18,6 +18,8 @@ PATTERNS=(
     "time.step"
     "timing.output"
     "ocean.output"
+    "ocean.output*"
+    "slope_ratio*"
     "namcouple"
     "namcouple_ref"
     "communication_report.txt"
