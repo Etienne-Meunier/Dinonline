@@ -92,7 +92,7 @@
    cn_exp      = 'DINO' !  experience name
    nn_it000    =       10800001      !  first time step
    !nn_itend    =       4     !  last time step (32 it => 1 day, 11520 => 1 year)
-   nn_itend    =       10800000 !  last time step (120 it => 1 day, 43200 => 1 year)
+   nn_itend    =       11232000 !  last time step (120 it => 1 day, 43200 => 1 year)
    nn_istate   =       1      !  output the initial state (1) or not (0)
    ! nn_stock    =      11520   !  frequency of creation of a restart file (modulo referenced to 1) 50 years
    ! nn_write    =      11520   !  frequency of write in the output file   (modulo referenced to nn_it000)
