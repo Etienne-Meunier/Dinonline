@@ -29,6 +29,7 @@ module load intel-mpi/${intel_version}
 module load hdf5/1.10.5-mpi
 module load netcdf/4.7.2-mpi
 module load netcdf-fortran/4.5.2-mpi
+module load nco/4.8.1
 module load python/3.10.4
 
 source $I_MPI_ROOT/intel64/bin/mpivars.sh release_mt
