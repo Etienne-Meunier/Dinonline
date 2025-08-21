@@ -18,13 +18,16 @@ PATTERNS=(
     "time.step"
     "timing.output"
     "ocean.output"
+    "ocean.output*"
     "namcouple"
+    "core-nemo-*"
     "namcouple_ref"
     "communication_report.txt"
     "layout.dat"
     "output.namelist.dyn"
     "debug"
 )
+
 
 echo "Cleaning directory: $TARGET_DIR"
 echo "The following items will be deleted based on wildcard patterns:"
