@@ -9,6 +9,8 @@ PATTERNS=(
     "DINO_10d_grid_inst_*.nc"
     "DINO_1m_grid_T_2D.nc"
     "DINO_3m_grid_*.nc"
+    "DINO_1ts_*.nc"
+    "core-python3-*"
     "debug.*"
     "DINO_MK25.*"
     "eophis*"
@@ -27,7 +29,6 @@ PATTERNS=(
     "output.namelist.dyn"
     "debug"
 )
-
 
 echo "Cleaning directory: $TARGET_DIR"
 echo "The following items will be deleted based on wildcard patterns:"

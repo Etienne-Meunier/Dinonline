@@ -29,7 +29,7 @@ NN_IT000=$(( $(printf "%.0f" $TIME_COUNTER) + 1 ))  # add 1 here
 NN_ITEND=$((NN_IT000 + NSTEPS))
 
 # Update namelist_cfg
-RESTART_BASENAME=$(basename "$RESTART_FILE" .nc)
+RESTART_BASENAME="${RESTART_FILE%.nc}"
 
 sed -i "s|^\( *cn_ocerst_in *= *\).*|\1'${RESTART_BASENAME}'|" "$NAMELIST_FILE"
 sed -i "s|^\( *nn_it000 *= *\).*|\1${NN_IT000}|" "$NAMELIST_FILE"

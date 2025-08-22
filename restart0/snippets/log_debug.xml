@@ -1,9 +1,9 @@
 <file_group id="inst_debug" output_freq="1ts" output_level="10" enabled=".TRUE.">
-    <file id="file6" name_suffix="_debug_U_3D">
+    <file id="file9" name_suffix="_grid_debug_U_3D">
         <field field_ref="uoce_inst"/>
         <field field_ref="ext_uf_inst"/>
     </file>
-    <file id="file7" name_suffix="_debug_V_3D">
+    <file id="file10" name_suffix="_grid_debug_V_3D">
         <field field_ref="voce_inst"/>
         <field field_ref="ext_vf_inst"/>
     </file>
