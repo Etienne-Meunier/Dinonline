@@ -31,7 +31,7 @@ def ocean_info():
     # static coupling (manual send/receive)
     tunnel_config.append( { 'label' : 'TO_NEMO_METRICS', \
                             'grids' : { 'DINO_Grid' : {'npts' : (202,797), 'halos':10, 'bnd':('close', 'close')} }, \
-                            'exchs' : [ {'freq' : 99999900, 'grd' : 'DINO_Grid', 'lvl' : nlvl, 'in' : ['mask_u','mask_v'], 'out' : []} ] }
+                            'exchs' : [ {'freq' : Freqs.STATIC, 'grd' : 'DINO_Grid', 'lvl' : nlvl, 'in' : ['mask_u', 'mask_v'], 'out' : []}] }
                         )
 
     return tunnel_config, nemo_nml
@@ -70,6 +70,15 @@ def production():
     # link all tunnels (beware, dormant errors will likely appear here)
     eophis.open_tunnels()
 
+    # get masks
+    mask_u = nemo_metrics.receive('mask_u')
+    mask_v = nemo_metrics.receive('mask_v')
+
+    if mask_u is not None and mask_v is not None:
+        eophis.info("DEBUG : Masks received successfully.")
+    else:
+        eophis.info("DEBUG : Failed to receive masks.")
+
     #  Models
     # ++++++++
     from ZB_DINO.online.ml_models import OnlineModel
@@ -83,9 +92,6 @@ def production():
 
     eophis.info('========= Model loaded =========')
 
-    # get masks
-    mask_u = nemo_metrics.receive('mask_u')
-    mask_v = nemo_metrics.receive('mask_v')
 
     #  Assemble
     # ++++++++++
@@ -96,7 +102,7 @@ def production():
         return outputs
 
     #  Run
-    # +++++
+    # +++++ls
     eophis.starter(loop_core)
 
 # ============================ #

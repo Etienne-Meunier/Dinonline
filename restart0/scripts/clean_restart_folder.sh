@@ -6,6 +6,7 @@ TARGET_DIR="."
 # Patterns of files/directories to remove
 PATTERNS=(
     "DINO_*_restart_*.nc"
+    "DINO_*_restart.nc"
     "DINO_10d_grid_inst_*.nc"
     "DINO_1m_grid_T_2D.nc"
     "DINO_3m_grid_*.nc"
@@ -29,6 +30,7 @@ PATTERNS=(
     "output.namelist.dyn"
     "debug"
 )
+
 
 echo "Cleaning directory: $TARGET_DIR"
 echo "The following items will be deleted based on wildcard patterns:"
