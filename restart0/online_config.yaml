@@ -4,4 +4,5 @@ debug_path: debug/
 debug_freq: 1.0
 flags: []
 restart_path: restart_files/warmstart_param.nc
-nsteps: 30
+halos: 40
+nsteps: 1000

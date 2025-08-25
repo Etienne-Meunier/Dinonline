@@ -21,16 +21,19 @@ def ocean_info():
     nemo_nml = eophis.FortranNamelist(os.path.join(os.getcwd(),'namelist_cfg'))
     step,nlvl = nemo_nml.get('rn_Dt','nn_lvl')
 
+    # online config
+    config = OmegaConf.load('online_config.yaml')
+
     # coupling config
     tunnel_config = list()
     tunnel_config.append( { 'label' : 'TO_NEMO_FIELDS', \
-                            'grids' : { 'DINO_Grid' : {'npts' : (202,797), 'halos':10 , 'bnd':('close', 'close')} }, \
+                            'grids' : { 'DINO_Grid' : {'npts' : (202,797), 'halos':config.halos , 'bnd':('close', 'close')} }, \
                             'exchs' : [ {'freq' : step, 'grd' : 'DINO_Grid', 'lvl' : nlvl, 'in' : ['u','v'], 'out' : ['u_f','v_f']} ] }
                         )
 
     # static coupling (manual send/receive)
     tunnel_config.append( { 'label' : 'TO_NEMO_METRICS', \
-                            'grids' : { 'DINO_Grid' : {'npts' : (202,797), 'halos':10, 'bnd':('close', 'close')} }, \
+                            'grids' : { 'DINO_Grid' : {'npts' : (202,797), 'halos':config.halos, 'bnd':('close', 'close')} }, \
                             'exchs' : [ {'freq' : Freqs.STATIC, 'grd' : 'DINO_Grid', 'lvl' : nlvl, 'in' : ['mask_u', 'mask_v'], 'out' : []}] }
                         )
 

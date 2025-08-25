@@ -1,2 +1,3 @@
-./rebuild_nemo.exe
-rm DINO_*_restart_*.nc
+if ./rebuild_nemo.exe | tee /tmp/rebuild.log | grep -q "NEMO rebuild completed successfully"; then
+    rm DINO_*_restart_*.nc
+fi
