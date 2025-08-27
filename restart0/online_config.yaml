@@ -5,5 +5,5 @@ debug_freq: 0.0
 flags: []
 restart_path: restart_files/warmstart_param.nc
 halos: 40
-nsteps: 1000
+nsteps: 10000
 xios_debug: True
