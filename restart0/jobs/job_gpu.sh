@@ -34,8 +34,8 @@ module load python/3.10.4
 
 source $I_MPI_ROOT/intel64/bin/mpivars.sh release_mt
 
-# Move to parent directory
-cd "$(dirname "$(dirname "${BASH_SOURCE[0]}")")"
+# Move to execution directory
+cd ${SLURM_SUBMIT_DIR}
 set -x
 pwd
 
