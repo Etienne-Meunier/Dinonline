@@ -27,7 +27,7 @@ PATTERNS=(
     "namcouple_ref"
     "communication_report.txt"
     "layout.dat"
-    "output.namelist.dyn"
+    "output.*"
     "debug"
 )
 
