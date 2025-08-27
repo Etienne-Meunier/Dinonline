@@ -1,5 +1,6 @@
-weights_path: weights/5fgl4ltv/checkpoints/last.ckpt
-config_path: weights/5fgl4ltv/fit_config.yaml
+mid: 5fgl4ltv
+weights_path: weights/${mid}/checkpoints/last.ckpt
+config_path: weights/${mid}/fit_config.yaml
 debug_path: debug/
 debug_freq: 0.0
 flags: []

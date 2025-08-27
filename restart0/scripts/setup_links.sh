@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 NEMO_EXECUTABLE=/lustre/fsn1/projects/rech/omr/romr004/data/executables/david_v1/nemo.exe
 REBUILD_NEMO=/lustre/fsn1/projects/rech/omr/romr004/data/executables/david_v1/rebuild_nemo.exe
 RESTART_FILES=/lustre/fsn1/projects/rech/omr/romr004/data/restart_files/

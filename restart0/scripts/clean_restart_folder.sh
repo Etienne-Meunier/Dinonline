@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Target directory to clean (change if needed)
 TARGET_DIR="."
