@@ -77,7 +77,7 @@
     </file_group>
 
 
-	<file_group id="inst_debug" output_freq="1ts" output_level="10" enabled=".FALSE.">
+	<file_group id="inst_debug" output_freq="1ts" output_level="10" enabled=".TRUE.">
 		<file id="file9" name_suffix="_U_grid_debug_3D">
 			<field field_ref="uoce_inst"  	/>
 			<field field_ref="ext_uf_inst"  	/>
