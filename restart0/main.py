@@ -101,6 +101,8 @@ def production():
     @eophis.all_in_all_out(geo_model=nemo, step=step, niter=niter)
     def loop_core(**inputs):
         outputs = {}
+        timestep = int(open('time.step').read().strip())
+        eophis.info('timestep : {timestep}')
         outputs['u_f'], outputs['v_f'] = model.prediction(u=inputs['u'], v=inputs['v'], mask_u=mask_u, mask_v=mask_v )
         return outputs
 
