@@ -29,6 +29,7 @@ PATTERNS=(
     "layout.dat"
     "output.*"
     "debug"
+    "run_file"
 )
 
 

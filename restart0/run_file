@@ -1,2 +1,0 @@
-0-7 ./nemo
-8-9 python3 ./main.py --exec prod
