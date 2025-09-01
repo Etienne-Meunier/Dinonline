@@ -5,32 +5,25 @@
 #SBATCH --job-name=DINO_MK25
 #SBATCH --output=DINO_MK25.out
 #SBATCH --error=DINO_MK25.err
-#SBATCH --ntasks-per-node=40
-#SBATCH --cpus-per-task=1
-#SBATCH --nodes=4
-#SBATCH --gres=gpu:4
+#SBATCH --ntasks=2
+#SBATCH --gres=gpu:1
 #SBATCH --hint=nomultithread
-#SBATCH --time=6:00:00
-#SBATCH --account=omr@v100
+#SBATCH --time=0:30:00
+#SBATCH --account=cli@v100
 #SBATCH --qos=qos_gpu-t3
 
-# Load Environnment
-# source ~/.bash_profile
-module purge # purge modules inherited by default
-
 # Process distribution
-NPROCS_NEMO=60
-NPROCS_PYTHON=20
+NPROCS_NEMO=1
+NPROCS_PYTHON=1
 
 # loading necessary modules
-intel_version=19.0.4
-module load intel-compilers/${intel_version}
-module load intel-mpi/${intel_version}
-module load hdf5/1.10.5-mpi
-module load netcdf/4.7.2-mpi
-module load netcdf-fortran/4.5.2-mpi
-module load nco/4.8.1
-module load python/3.10.4
+module purge
+module load pytorch-gpu/py3/2.2.0
+module load netcdf-c/4.7.4-mpi-cuda
+module load netcdf-fortran/4.5.3-mpi-cuda
+module load hdf5/1.12.0-mpi-cuda
+module load DCM/4.2.1
+module load nco/4.9.3
 
 source $I_MPI_ROOT/intel64/bin/mpivars.sh release_mt
 
@@ -76,13 +69,13 @@ else
 fi
 
 # write multi-prog file
-# rm -f run_file
-# touch run_file
-# echo 0-$((NPROCS_NEMO - 1)) ./nemo >> run_file
-# echo ${NPROCS_NEMO}-$((NPROCS_NEMO + NPROCS_PYTHON - 1)) python3 ./main.py --exec prod >> run_file
+touch run_file
+rm -r run_file
+echo 0-$((NPROCS_NEMO - 1)) ./nemo >> run_file
+echo ${NPROCS_NEMO}-$((NPROCS_NEMO + NPROCS_PYTHON - 1)) python3 ./main.py --exec prod >> run_file
 
 module list
 # run coupled NEMO-Python
-time srun --multi-prog ./jobs/run_file
+time srun --multi-prog ./run_file
 
 date

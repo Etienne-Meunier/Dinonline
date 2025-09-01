@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NEMO_EXECUTABLE=/lustre/fsn1/projects/rech/cli/udp79td/nemo_v4.2.1/cfgs/DINO/BLD/bin//nemo.exe
+NEMO_EXECUTABLE=/lustre/fswork/projects/rech/cli/udp79td/nemo_v4.2.1/cfgs/DINO/BLD/bin//nemo.exe
 REBUILD_NEMO=/lustre/fswork/projects/rech/omr/romr004/data/executables/david_v1/rebuild_nemo.exe
 RESTART_FILES=/lustre/fswork/projects/rech/omr/romr004/data/restart_files/
 ZB_DINO=/lustre/fsn1/projects/rech/omr/romr004/code/ZB_DINO/

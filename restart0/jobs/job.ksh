@@ -5,14 +5,14 @@
 #SBATCH --job-name=DINO_MK25
 #SBATCH --output=DINO_MK25.out
 #SBATCH --error=DINO_MK25.err
-#SBATCH --ntasks=2
+#SBATCH --ntasks=10
 #SBATCH --time=0:30:00
 #SBATCH --account=cli@cpu
 #SBATCH --partition=prepost
 
 # Process distribution
-NPROCS_NEMO=1
-NPROCS_PYTHON=1
+NPROCS_NEMO=8
+NPROCS_PYTHON=2
 
 # loading necessary modules
 module purge
