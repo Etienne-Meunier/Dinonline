@@ -5,14 +5,14 @@
 #SBATCH --job-name=DINO_MK25
 #SBATCH --output=DINO_MK25.out
 #SBATCH --error=DINO_MK25.err
-#SBATCH --ntasks=10
+#SBATCH --ntasks=65
 #SBATCH --time=0:30:00
-#SBATCH --account=cli@cpu
-#SBATCH --partition=prepost
+#SBATCH --account=omr@cpu
+#SBATCH --partition=cpu_p1
 
 # Process distribution
-NPROCS_NEMO=8
-NPROCS_PYTHON=2
+NPROCS_NEMO=50
+NPROCS_PYTHON=15
 
 # loading necessary modules
 module purge
@@ -20,7 +20,6 @@ module load pytorch-gpu/py3/2.2.0
 module load netcdf-c/4.7.4-mpi-cuda
 module load netcdf-fortran/4.5.3-mpi-cuda
 module load hdf5/1.12.0-mpi-cuda
-module load DCM/4.2.1
 module load nco/4.9.3
 
 source $I_MPI_ROOT/intel64/bin/mpivars.sh release_mt
