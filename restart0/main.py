@@ -28,13 +28,14 @@ def ocean_info():
     tunnel_config = list()
     tunnel_config.append( { 'label' : 'TO_NEMO_FIELDS', \
                             'grids' : { 'DINO_Grid' : {'npts' : (202,797), 'halos':config.halos , 'bnd':('close', 'close')} }, \
-                            'exchs' : [ {'freq' : step, 'grd' : 'DINO_Grid', 'lvl' : nlvl, 'in' : ['u','v'], 'out' : ['u_f','v_f']} ] }
+                            'exchs' : [ {'freq' : step, 'grd' : 'DINO_Grid', 'lvl' : nlvl, 'in' : ['u','v','e3t'], 'out' : ['u_f','v_f']} ] }
                         )
 
     # static coupling (manual send/receive)
     tunnel_config.append( { 'label' : 'TO_NEMO_METRICS', \
                             'grids' : { 'DINO_Grid' : {'npts' : (202,797), 'halos':config.halos, 'bnd':('close', 'close')} }, \
-                            'exchs' : [ {'freq' : Freqs.STATIC, 'grd' : 'DINO_Grid', 'lvl' : nlvl, 'in' : ['mask_u', 'mask_v'], 'out' : []}] }
+                            'exchs' : [ {'freq' : Freqs.STATIC, 'grd' : 'DINO_Grid', 'lvl' : nlvl, 'in' : ['mask_u', 'mask_v'], 'out' : []}, \
+                                        {'freq' : Freqs.STATIC, 'grd' : 'DINO_Grid', 'lvl' : 1, 'in' : ['e1t','e2t','gphit','glamt'], 'out' : []} ] }
                         )
 
     return tunnel_config, nemo_nml
@@ -73,9 +74,13 @@ def production():
     # link all tunnels (beware, dormant errors will likely appear here)
     eophis.open_tunnels()
 
-    # get masks
+    # get masks and metrics
     mask_u = nemo_metrics.receive('mask_u')
     mask_v = nemo_metrics.receive('mask_v')
+    e1t = nemo_metrics.receive('e1t')
+    e2t = nemo_metrics.receive('e2t')
+    gphit = nemo_metrics.receive('gphit')
+    glamt = nemo_metrics.receive('glamt')
 
     if mask_u is not None and mask_v is not None:
         eophis.info("DEBUG : Masks received successfully.")
@@ -88,10 +93,10 @@ def production():
 
     eophis.info('========= Load model =========')
     
-    config = OmegaConf.load('online_config.yaml')
-    config.debug_path = f'{os.getcwd()}/{config.debug_path}'
-    with working_directory('./ZB_DINO'):
-        model = OnlineModel(config)
+    #config = OmegaConf.load('online_config.yaml')
+    #config.debug_path = f'{os.getcwd()}/{config.debug_path}'
+    #with working_directory('./ZB_DINO'):
+    #    model = OnlineModel(config)
 
     eophis.info('========= Model loaded =========')
 
@@ -101,8 +106,7 @@ def production():
     @eophis.all_in_all_out(geo_model=nemo, step=step, niter=niter)
     def loop_core(**inputs):
         outputs = {}
-        timestep = int(open('time.step').read().strip())
-        eophis.info('timestep : {timestep}')
+        eophis.info(f'Inputs : {inputs.keys()}')
         outputs['u_f'], outputs['v_f'] = model.prediction(u=inputs['u'], v=inputs['v'], mask_u=mask_u, mask_v=mask_v )
         return outputs
 

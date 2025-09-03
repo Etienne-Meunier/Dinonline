@@ -18,19 +18,10 @@
 # source ~/.bash_profile
 module purge # purge modules inherited by default
 
-# Process distribution
-NPROCS_NEMO=60
-NPROCS_PYTHON=20
-
 # loading necessary modules
-intel_version=19.0.4
-module load intel-compilers/${intel_version}
-module load intel-mpi/${intel_version}
-module load hdf5/1.10.5-mpi
-module load netcdf/4.7.2-mpi
-module load netcdf-fortran/4.5.2-mpi
-module load nco/4.8.1
-module load python/3.10.4
+command -v conda >/dev/null 2>&1 && conda deactivate || echo "Skipping conda deactivate (conda not found)"
+
+source arch
 
 source $I_MPI_ROOT/intel64/bin/mpivars.sh release_mt
 
@@ -74,12 +65,6 @@ if [ ! -e ${namcouple} ]; then
 else
         echo "preproduction successful"
 fi
-
-# write multi-prog file
-# rm -f run_file
-# touch run_file
-# echo 0-$((NPROCS_NEMO - 1)) ./nemo >> run_file
-# echo ${NPROCS_NEMO}-$((NPROCS_NEMO + NPROCS_PYTHON - 1)) python3 ./main.py --exec prod >> run_file
 
 module list
 # run coupled NEMO-Python
