@@ -19,9 +19,19 @@
 module purge # purge modules inherited by default
 
 # loading necessary modules
-command -v conda >/dev/null 2>&1 && conda deactivate || echo "Skipping conda deactivate (conda not found)"
+if command -v conda >/dev/null 2>&1; then
+    if [[ -n "$CONDA_DEFAULT_ENV" ]]; then
+        # make sure the conda shell functions are available
+        source "$(conda info --base)/etc/profile.d/conda.sh"
+        conda deactivate
+    else
+        echo "No conda environment active"
+    fi
+else
+    echo "Skipping conda deactivate (conda not found)"
+fi
 
-source arch
+source ./arch
 
 source $I_MPI_ROOT/intel64/bin/mpivars.sh release_mt
 
