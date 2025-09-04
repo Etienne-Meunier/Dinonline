@@ -93,10 +93,10 @@ def production():
 
     eophis.info('========= Load model =========')
     
-    #config = OmegaConf.load('online_config.yaml')
-    #config.debug_path = f'{os.getcwd()}/{config.debug_path}'
-    #with working_directory('./ZB_DINO'):
-    #    model = OnlineModel(config)
+    config = OmegaConf.load('online_config.yaml')
+    config.debug_path = f'{os.getcwd()}/{config.debug_path}'
+    with working_directory('./ZB_DINO'):
+       model = OnlineModel(config)
 
     eophis.info('========= Model loaded =========')
 
