@@ -10,8 +10,8 @@
 #SBATCH --nodes=4
 #SBATCH --gres=gpu:4
 #SBATCH --hint=nomultithread
-#SBATCH --time=6:00:00
+#SBATCH --time=02:00:00
 #SBATCH --account=omr@v100
-#SBATCH --qos=qos_gpu-t3
+#SBATCH --qos=qos_gpu-dev
 
 ./jobs/launch_job.sh

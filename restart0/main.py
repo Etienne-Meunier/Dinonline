@@ -98,6 +98,7 @@ def production():
     with working_directory('./ZB_DINO'):
        model = OnlineModel(config)
 
+    model.model_step = 0
     eophis.info('========= Model loaded =========')
 
 
@@ -108,6 +109,7 @@ def production():
         outputs = {}
         eophis.info(f'Inputs : {inputs.keys()}')
         outputs['u_f'], outputs['v_f'] = model.prediction(u=inputs['u'], v=inputs['v'], mask_u=mask_u, mask_v=mask_v )
+        model.model_step += 1
         return outputs
 
     #  Run
