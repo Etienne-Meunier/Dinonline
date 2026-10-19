@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=Blandine_C1_1_4deg
+#SBATCH --job-name=DINO_diffusion_1_4deg
 #SBATCH --hint=nomultithread       # 1 MPI process per physical core (no hyperthreading)
-#SBATCH --time=12:00:00
-#SBATCH --output=Blandine_C1_1_4deg.out
+#SBATCH --time=05:00:00
+#SBATCH --output=DINO_diffusion_1_4deg.out
 #SBATCH --ntasks-per-node=40
 #SBATCH --nodes=15
-#SBATCH --mail-type=FAIL
-#SBATCH --mail-user=david.kamm@locean.ipsl.fr
+#SBATCH --mail-type=NONE
 #SBATCH --account=omr@cpu # cpu accounting
 #SBATCH --qos=qos_cpu-t3 # QoS
 ######################

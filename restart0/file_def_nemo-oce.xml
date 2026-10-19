@@ -8,7 +8,7 @@
     -->
     
     <file_definition type="one_file" name="@expname@_@freq@" sync_freq="10d" min_digits="4">
-      <file_group id="1y" output_freq="1y"  output_level="10" enabled=".TRUE." >  <!-- 1y files -->  
+      <file_group id="1m_3D" output_freq="1mo"  output_level="10" enabled=".TRUE." >  <!-- 1m 3D files -->
 
 	<file id="file1" name_suffix="_grid_T_3D" description="ocean T grid variables" >
 	  <field field_ref="toce" /> 
@@ -41,7 +41,7 @@
 	</file>
     </file_group>
 
-	<file_group id="10d_inst" output_freq="10d"  output_level="10" enabled=".TRUE." >
+	<file_group id="10d_inst" output_freq="10d"  output_level="10" enabled=".FALSE." >
 
 	<file id="file6" name_suffix="_grid_inst_V_3D" description="instant ocean V grid variables monthly" >
 	  <field field_ref="voce_inst"  	/>
