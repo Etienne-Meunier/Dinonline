@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+    <!--
+============================================================================================================
+=                                           output files definition                                        =
+=           Weekly variant of file_def_nemo-oce.xml, for runs of a few years : copy it onto                =
+=           file_def_nemo-oce.xml (read by context_nemo.xml). 7-day means of the 3D T, S, U, V fields and  =
+=           daily means of the 2D fields. About 190 MB of 3D output per simulated week.                    =
+============================================================================================================
+    -->
+
+    <file_definition type="one_file" name="@expname@_@freq@" sync_freq="10d" min_digits="4">
+      <file_group id="7d_3D" output_freq="7d"  output_level="10" enabled=".TRUE." >  <!-- 7d 3D files -->
+
+	<file id="file1" name_suffix="_grid_T_3D" description="ocean T grid variables" >
+	  <field field_ref="toce" />
+	  <field field_ref="soce" />
+	  <field field_ref='e3t' />
+	</file>
+
+	<file id="file2" name_suffix="_grid_U_3D" description="ocean U grid variables" >
+	  <field field_ref="uoce" />
+	  <field field_ref="uoce_e3u" />
+	</file>
+
+	<file id="file3" name_suffix="_grid_V_3D" description="ocean V grid variables" >
+	  <field field_ref="voce" />
+	  <field field_ref="voce_e3v" />
+	</file>
+
+      </file_group>
+
+      <file_group id="1d" output_freq="1d"  output_level="10" enabled=".TRUE." >  <!-- 1d 2D files -->
+	<file id="file4" name_suffix="_grid_T_2D" description="ocean T grid variables daily" >
+	  <field field_ref="ssh"  />
+	  <field field_ref="sst" />
+	  <field field_ref="sss" />
+	  <field field_ref="saltflx" />
+	  <field field_ref='qns'  />
+	  <field field_ref='qsr'  />
+	  <field field_ref='mldr10_1' />
+	  <field field_ref='mldr10_1max' />
+	</file>
+      </file_group>
+
+   </file_definition>
